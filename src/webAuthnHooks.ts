@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { client } from '@passwordless-id/webauthn';
+import { v7 as uuid } from 'uuid';
 import { deleteRegistration, getChallenge, submitAuthentication, submitRegistration } from './api';
 
 export const useWebAuthn = () => {
@@ -10,24 +11,19 @@ export const useWebAuthn = () => {
 
   const register = () => {
     getChallenge().then(async ({ challenge, sessionId }) => {
-      console.log(1);
       const registration = await client.register({
         attestation: false,
         challenge,
         discoverable: 'preferred',
-        user: { name: 'NO WAY' },
+        user: { name: uuid() },
         userVerification: 'preferred',
       });
-      console.log(2);
       const { credential } = await submitRegistration({
         sessionId,
         registration,
       });
-      console.log(3);
       setUserId(credential.id);
-      console.log(4);
       localStorage.setItem('user-id', credential.id);
-      console.log(5);
     });
   };
 
