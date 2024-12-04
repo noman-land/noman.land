@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { client } from '@passwordless-id/webauthn';
 import { v7 as uuid } from 'uuid';
 import { deleteRegistration, getChallenge, submitAuthentication, submitRegistration } from './api';
@@ -9,7 +9,7 @@ export const useWebAuthn = () => {
     return localStorage.getItem('user-id');
   });
 
-  const register = () => {
+  const register = useCallback(() => {
     getChallenge().then(async ({ challenge, sessionId }) => {
       const registration = await client.register({
         attestation: false,
@@ -25,9 +25,9 @@ export const useWebAuthn = () => {
       setUserId(credential.id);
       localStorage.setItem('user-id', credential.id);
     });
-  };
+  }, []);
 
-  const logIn = () => {
+  const logIn = useCallback(() => {
     getChallenge().then(async ({ challenge, sessionId }) => {
       const authentication = await client.authenticate({
         allowCredentials: [userId!],
@@ -37,13 +37,13 @@ export const useWebAuthn = () => {
       await submitAuthentication({ sessionId, authentication });
       setAuthed(true);
     });
-  };
+  }, [userId]);
 
-  const logOut = () => {
+  const logOut = useCallback(() => {
     setAuthed(false);
-  };
+  }, []);
 
-  const deleteAccount = async () => {
+  const deleteAccount = useCallback(() => {
     getChallenge().then(async ({ challenge, sessionId }) => {
       const authentication = await client.authenticate({
         allowCredentials: [userId!],
@@ -58,7 +58,7 @@ export const useWebAuthn = () => {
         authentication,
       });
     });
-  };
+  }, [userId, logOut]);
 
   return {
     authed,
