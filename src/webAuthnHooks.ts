@@ -5,7 +5,8 @@ import { deleteRegistration, getChallenge, submitAuthentication, submitRegistrat
 export const useWebAuthn = () => {
   const [authed, setAuthed] = useState(false);
   const [userId, setUserId] = useState<string | null>(() => {
-    return localStorage.getItem('user-id');
+    // return localStorage.getItem('user-id');
+    return null;
   });
 
   const register = () => {
@@ -13,7 +14,7 @@ export const useWebAuthn = () => {
       const registration = await client.register({
         attestation: false,
         challenge,
-        // discoverable: 'discouraged',
+        discoverable: 'discouraged',
         user: { name: '' },
         userVerification: 'preferred',
       });
@@ -22,7 +23,7 @@ export const useWebAuthn = () => {
         registration,
       });
       setUserId(credential.id);
-      localStorage.setItem('user-id', credential.id);
+      // localStorage.setItem('user-id', credential.id);
     });
   };
 
@@ -51,7 +52,7 @@ export const useWebAuthn = () => {
       });
       logOut();
       setUserId(null);
-      localStorage.removeItem('user-id');
+      // localStorage.removeItem('user-id');
       await deleteRegistration({
         sessionId,
         authentication,
