@@ -1,11 +1,6 @@
 import { useState } from 'react';
 import { client } from '@passwordless-id/webauthn';
-import {
-  deleteRegistration,
-  getChallenge,
-  submitAuthentication,
-  submitRegistration,
-} from './api';
+import { deleteRegistration, getChallenge, submitAuthentication, submitRegistration } from './api';
 
 export const useWebAuthn = () => {
   const [authed, setAuthed] = useState(false);
@@ -18,7 +13,7 @@ export const useWebAuthn = () => {
       const registration = await client.register({
         attestation: false,
         challenge,
-        discoverable: 'discouraged',
+        // discoverable: 'discouraged',
         user: { name: '' },
         userVerification: 'preferred',
       });
