@@ -5,25 +5,29 @@ import { deleteRegistration, getChallenge, submitAuthentication, submitRegistrat
 export const useWebAuthn = () => {
   const [authed, setAuthed] = useState(false);
   const [userId, setUserId] = useState<string | null>(() => {
-    // return localStorage.getItem('user-id');
-    return null;
+    return localStorage.getItem('user-id');
   });
 
   const register = () => {
     getChallenge().then(async ({ challenge, sessionId }) => {
+      console.log(1);
       const registration = await client.register({
         attestation: false,
         challenge,
-        discoverable: 'discouraged',
-        user: { name: '' },
+        discoverable: 'preferred',
+        user: { name: 'NO WAY' },
         userVerification: 'preferred',
       });
+      console.log(2);
       const { credential } = await submitRegistration({
         sessionId,
         registration,
       });
+      console.log(3);
       setUserId(credential.id);
-      // localStorage.setItem('user-id', credential.id);
+      console.log(4);
+      localStorage.setItem('user-id', credential.id);
+      console.log(5);
     });
   };
 
@@ -52,7 +56,7 @@ export const useWebAuthn = () => {
       });
       logOut();
       setUserId(null);
-      // localStorage.removeItem('user-id');
+      localStorage.removeItem('user-id');
       await deleteRegistration({
         sessionId,
         authentication,
