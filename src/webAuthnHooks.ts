@@ -14,9 +14,9 @@ export const useWebAuthn = () => {
       const registration = await client.register({
         attestation: false,
         challenge,
-        discoverable: 'preferred',
+        discoverable: 'required',
         user: { name: uuid() },
-        userVerification: 'preferred',
+        userVerification: 'required',
       });
       const { credential } = await submitRegistration({
         sessionId,
@@ -32,7 +32,7 @@ export const useWebAuthn = () => {
       const authentication = await client.authenticate({
         allowCredentials: [userId!],
         challenge,
-        userVerification: 'preferred',
+        userVerification: 'required',
       });
       await submitAuthentication({ sessionId, authentication });
       setAuthed(true);
@@ -48,7 +48,7 @@ export const useWebAuthn = () => {
       const authentication = await client.authenticate({
         allowCredentials: [userId!],
         challenge,
-        userVerification: 'preferred',
+        userVerification: 'required',
       });
       logOut();
       setUserId(null);
