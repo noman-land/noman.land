@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "npm run build && wrangler pages dev ./dist",
     "deploy": "npm run build && wrangler pages deploy ./dist",
-    "pages": "git subtree push --prefix dist page master"
+    "pages": "npm run build && git subtree push --prefix dist page master"
   },
   "dependencies": {
     "@passwordless-id/webauthn": "^2.1.2",
