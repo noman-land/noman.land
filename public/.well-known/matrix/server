@@ -1,3 +1,1 @@
-{
-  "m.server": "matrix.noman.land:443"
-}
+public/.well-known/matrix/server.json
