@@ -11,7 +11,7 @@
   },
   "workers_dev": false,
   "route": {
-    "pattern": "https://noman.land/*",
+    "pattern": "https://noman.land",
     "zone_name": "noman.land"
   }
 }
