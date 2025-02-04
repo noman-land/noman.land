@@ -11,7 +11,7 @@
   },
   "workers_dev": false,
   "route": {
-    "pattern": "https://noman.land",
+    "pattern": "noman.land",
     "custom_domain": true
   }
 }
