@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "noman-land",
+  "main": "src/index.tsx",
+  "compatibility_date": "2025-01-29",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "./public/"
+  },
+  "workers_dev": false,
+  "route": {
+    "pattern": "https://noman.land*",
+    "zone_name": "noman.land"
+  }
+}
