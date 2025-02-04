@@ -12,7 +12,7 @@ export const Html = () => {
         <meta name="description" content="Noman Land" />
         <meta property="og:image" content="icon.png" />
         <meta property="og:type" content="article" />
-        <meta property="og:site_name" content="Noman Land" />
+        <meta property="og:site_name" content="noman.land" />
         <meta property="og:locale" content="en_US" />
         <link rel="shortcut icon" href="icon.png" />
       </head>
