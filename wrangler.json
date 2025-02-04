@@ -12,6 +12,6 @@
   "workers_dev": false,
   "route": {
     "pattern": "https://noman.land",
-    "zone_name": "noman.land"
+    "custom_domain": true
   }
 }
