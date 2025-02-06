@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => {
         rollupOptions: {
           input: './src/client/index.tsx',
           output: {
-            entryFileNames: 'assets/[name]-[hash].js',
+            entryFileNames: 'assets/[name].js',
           },
         },
         outDir: './public',
