@@ -2,7 +2,7 @@
 dist/
 
 # prod assets build
-/public
+public/
 
 # dev
 .yarn/
