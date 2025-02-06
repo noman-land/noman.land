@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import { jsxRenderer } from "hono/jsx-renderer";
 
-import { Counter } from "./client/Counter";
+import { Home } from './client/Home';
 import { Html } from './components/Html';
 import { wellKnown } from './routes/wellKnown';
 
@@ -15,6 +15,6 @@ const app = new Hono<{ Bindings: Bindings; }>({ strict: false })
       { docType: true }
     )
   )
-  .get('/', c => c.render(<Counter />));
+  .get('/', c => c.render(<Home />));
 
 export default app;

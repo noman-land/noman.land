@@ -1,7 +1,7 @@
 import { StrictMode } from "hono/jsx";
 import { hydrateRoot } from "hono/jsx/dom/client";
 
-import { Counter } from "./Counter";
+import { Home } from "./Home";
 
 const root = document.getElementById("root");
 
@@ -12,6 +12,6 @@ if (!root) {
 hydrateRoot(
   root,
   <StrictMode>
-    <Counter />
+    <Home />
   </StrictMode>
 );
