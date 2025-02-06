@@ -1,11 +1,20 @@
 import { Hono } from 'hono';
-import { MASTODON_XML, MATRIX_JSON } from './constants';
-import { Html } from './components/Html';
+import { jsxRenderer } from "hono/jsx-renderer";
 
-export default new Hono<{ Bindings: CloudflareBindings; }>({ strict: false })
-  .get('/.well-known/matrix/server', async c => c.json(MATRIX_JSON))
-  .get('/.well-known/host-meta', async c => {
-    c.res.headers.append('Content-Type', 'application/xml');
-    return c.newResponse(MASTODON_XML);
-  })
-  .get('/', c => c.html(<Html />));
+import { Counter } from "./client/Counter";
+import { Html } from './components/Html';
+import { wellKnown } from './routes/wellKnown';
+
+export type AppType = typeof app;
+
+const app = new Hono<{ Bindings: Bindings; }>({ strict: false })
+  .route('/.well-known/', wellKnown)
+  .use(
+    jsxRenderer(
+      ({ children }) => <Html>{children}</Html>,
+      { docType: true }
+    )
+  )
+  .get('/', c => c.render(<Counter />));
+
+export default app;
