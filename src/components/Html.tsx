@@ -1,6 +1,6 @@
 import { Child } from 'hono/jsx';
 
-export const Html = ({ children }: { children: Child; }) => {
+export const Html = ({ children }: { children: Child }) => {
   return (
     <html lang="en">
       <head>
@@ -17,17 +17,11 @@ export const Html = ({ children }: { children: Child; }) => {
         <link rel="shortcut icon" href="icon.png" />
         <script
           type="module"
-          src={
-            import.meta.env.PROD
-              ? "/assets/index.js"
-              : "/src/client/index.tsx"
-          }
+          src={import.meta.env.PROD ? '/assets/index.js' : '/src/client/index.tsx'}
         />
       </head>
       <body>
-        <div id="root">
-          {children}
-        </div>
+        <div id="root">{children}</div>
       </body>
     </html>
   );

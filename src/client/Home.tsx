@@ -1,5 +1,3 @@
 export function Home() {
-  return (
-    <h1>Noman</h1>
-  );
+  return <h1>Noman</h1>;
 }
