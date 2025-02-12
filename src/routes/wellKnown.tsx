@@ -1,8 +1,11 @@
 import { Hono } from 'hono';
 import { MATRIX_JSON } from '../constants';
 
-export const wellKnown = new Hono<{ Bindings: Bindings }>({ strict: false })
+const MASTODON_DOMAIN = 'mastodon.noman.land';
+const MASTODON_USER = 'noman';
+
+export const wellKnown = new Hono<{ Bindings: Bindings; }>({ strict: false })
   .get('/matrix/server', async c => c.json(MATRIX_JSON))
-  .on('GET', ['/host-meta/:path?', '/webfinger/:path?', '/nodeinfo/:path?'], async c => {
-    return c.redirect(`https://mastodon.noman.land${c.req.path}`);
+  .on('GET', ['/host-meta*', '/webfinger*', '/nodeinfo*'], async c => {
+    return c.redirect(`https://${MASTODON_DOMAIN}${c.req.path}?resource=acct:${MASTODON_USER}@${MASTODON_DOMAIN}`);
   });
