@@ -12,6 +12,9 @@ const app = new Hono<{ Bindings: Bindings; }>({ strict: false })
   .route('/.well-known/', wellKnown)
   .on('GET', ['/authorize_interaction*'], async c => {
     const url = new URL(`https://${MASTODON_DOMAIN}${c.req.path}`);
+    for (const [k, v] of Object.entries(c.req.query())) {
+      url.searchParams.append(k, v);
+    }
     url.searchParams.append('resource', `acct:${MASTODON_USER}@${MASTODON_DOMAIN}`);
     return c.redirect(url);
   })
